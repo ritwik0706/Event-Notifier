@@ -16,7 +16,7 @@ import com.google.firebase.database.ValueEventListener
 class TabCreatedEvents:Fragment(){
 
     private var adapterCreatedEvent:AdapterCreatedEvent?=null
-    private var eventList=ArrayList<Event>()
+    private var eventList= mutableSetOf<Event>()
     private var flagList=ArrayList<Int>()
     private var layoutManager: RecyclerView.LayoutManager?=null
 

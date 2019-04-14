@@ -12,13 +12,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 
-class AdapterCreatedEvent(private val eventList:ArrayList<Event>,private val flagList:ArrayList<Int>, private val context: Context): RecyclerView.Adapter<AdapterCreatedEvent.CreatedViewHolder>(){
+class AdapterCreatedEvent(private val eventList:Set<Event>,private val flagList:ArrayList<Int>, private val context: Context): RecyclerView.Adapter<AdapterCreatedEvent.CreatedViewHolder>(){
 
     var mAuth: FirebaseAuth?=null
     var database= FirebaseDatabase.getInstance()!!
     var myRef= database.reference!!
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AdapterCreatedEvent.CreatedViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CreatedViewHolder{
         val myView= LayoutInflater.from(context).inflate(R.layout.card_requested_events,parent,false)
         mAuth= FirebaseAuth.getInstance()
         return CreatedViewHolder(myView)
@@ -28,8 +28,8 @@ class AdapterCreatedEvent(private val eventList:ArrayList<Event>,private val fla
         return eventList.size
     }
 
-    override fun onBindViewHolder(holder: AdapterCreatedEvent.CreatedViewHolder, position: Int) {
-        holder.BindItem(eventList[position])
+    override fun onBindViewHolder(holder: CreatedViewHolder, position: Int) {
+        holder.BindItem(eventList.elementAt(position))
 
         if (flagList[position] == 0){
             holder.buVerify.text = "Pending"
@@ -49,8 +49,8 @@ class AdapterCreatedEvent(private val eventList:ArrayList<Event>,private val fla
 
         fun BindItem(event:Event){
             name.text=event.name
-            venue.text="Venue : " + event.venue
-            date.text = "Date & Time :" +event.date
+            venue.text= event.venue
+            date.text = event.date
             uid = event.uid
             email = event.email
         }

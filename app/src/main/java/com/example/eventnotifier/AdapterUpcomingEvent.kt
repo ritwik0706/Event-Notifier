@@ -18,7 +18,7 @@ class AdapterUpcomingEvent(private val eventList:ArrayList<Event>, private val c
     var database= FirebaseDatabase.getInstance()!!
     var myRef= database.reference!!
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AdapterUpcomingEvent.UpcomingViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): UpcomingViewHolder{
         val myView= LayoutInflater.from(context).inflate(R.layout.card_requested_events,parent,false)
         mAuth= FirebaseAuth.getInstance()
         return UpcomingViewHolder(myView)
@@ -28,7 +28,7 @@ class AdapterUpcomingEvent(private val eventList:ArrayList<Event>, private val c
         return eventList.size
     }
 
-    override fun onBindViewHolder(holder: AdapterUpcomingEvent.UpcomingViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UpcomingViewHolder, position: Int) {
         holder.BindItem(eventList[position])
 
         holder.buVerify.setOnClickListener {
@@ -57,8 +57,8 @@ class AdapterUpcomingEvent(private val eventList:ArrayList<Event>, private val c
 
         fun BindItem(event:Event){
             name.text=event.name
-            venue.text= "Venue :" +  event.venue
-            date.text = "Date & Time :" + event.date
+            venue.text= event.venue
+            date.text = event.date
             uid = event.uid
             email = event.email
             buVerify.text = "Register"

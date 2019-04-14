@@ -17,7 +17,7 @@ class AdapterRegisteredEvent(private val eventList:ArrayList<Event>, private val
     var database= FirebaseDatabase.getInstance()!!
     var myRef= database.reference!!
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AdapterRegisteredEvent.RegisteredViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RegisteredViewHolder{
         val myView= LayoutInflater.from(context).inflate(R.layout.card_requested_events,parent,false)
         mAuth= FirebaseAuth.getInstance()
         return RegisteredViewHolder(myView)
@@ -27,7 +27,7 @@ class AdapterRegisteredEvent(private val eventList:ArrayList<Event>, private val
         return eventList.size
     }
 
-    override fun onBindViewHolder(holder: AdapterRegisteredEvent.RegisteredViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RegisteredViewHolder, position: Int) {
         holder.BindItem(eventList[position])
     }
 
@@ -41,8 +41,8 @@ class AdapterRegisteredEvent(private val eventList:ArrayList<Event>, private val
 
         fun BindItem(event:Event){
             name.text= event.name
-            venue.text= "Venue :" +  event.venue
-            date.text = "Date & Time :" + event.date
+            venue.text = event.venue
+            date.text = event.date
             uid = event.uid
             email = event.email
             buVerify.visibility = View.GONE
